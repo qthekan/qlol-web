@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>user match list</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- 내부 css -->
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 30%;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body>
+	<a th:href="@{https://www.op.gg/summoners/kr/{n}(n=${name})}" th:text="${name}" target="_blank" rel="noopener noreferrer"/>
+
+	<table id="matchList" >
+		<thead>
+			<tr>
+				<th>matchId</th>
+				<th>date</th>
+				<th>win</th>
+				<th>duration</th>
+				<th>teamId</th>
+				<th>teamPosition</th>
+				<th>championName</th>
+				<th>kills</th>
+				<th>deaths</th>
+				<th>assists</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- tr th:each : 행 반복문을 수행하겠다는 의미입니다 [여러 데이터 출력] -->
+			<tr th:each="list : ${matchList}">
+				<td><span th:text="${list.matchId}"></span></td>
+				<td><span th:text="${list.date}"></span></td>
+				<td><span th:text="${list.win}"></span></td>
+				<td><span th:text="${list.duration}"></span></td>
+				<td><span th:text="${list.teamId}"></span></td>
+				<td><span th:text="${list.teamPosition}"></span></td>
+				<td><span th:text="${list.championName}"></span></td>
+				<td><span th:text="${list.kills}"></span></td>
+				<td><span th:text="${list.deaths}"></span></td>
+				<td><span th:text="${list.assists}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+
+<script type="text/javascript">
+	$("#matchList").DataTable({
+		paging: false
+	});
+</script>
+
+</html>

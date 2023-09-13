@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>High Win Rate User List</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- 내부 css -->
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 30%;
+		}
+
+		td,
+		th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+</head>
+
+<body>
+	<p th:text="'고승률 유저 목록'" />
+
+	<table id="highwin">
+		<thead>
+			<tr>
+				<th>tier</th>
+				<th>rank</th>
+				<th>leaguePoints</th>
+				<th>summonerName</th>
+				<th>wins</th>
+				<th>losses</th>
+				<th>rate</th>
+			</tr>
+		</thead>
+	</table>
+
+</body>
+
+<script type="text/javascript">
+	$("#highwin").DataTable({
+		ajax: {url: '/highList', dataSrc: ""},
+		'processing': true,
+		'language': {
+			'loadingRecords': "&nbsp;",
+			'processing': "Loading..."
+		},
+		columns: [
+			{data: "tier"},
+			{data: "rank"},
+			{data: "leaguePoints"},
+			{data: "summonerName"},
+			{data: "wins"},
+			{data: "losses"},
+			{data: "rate"},
+		],
+		columnDefs: [
+			{
+				targets: 3,
+				render: function (data, type, row, meta) {
+					var tmp = '<a href="/user?name=' + data + '">' + data + '</a>';
+					return tmp;
+				}
+			}
+		]
+	});
+</script>
+
+</html>
