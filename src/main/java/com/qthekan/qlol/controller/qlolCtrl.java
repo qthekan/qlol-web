@@ -182,6 +182,13 @@ public class qlolCtrl {
 
 		return "user";
 	}
+	
+	@GetMapping("/riot.txt")
+	public String riot(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
+			Model model) {
+		model.addAttribute("name", name);
+		return "riot.txt";
+	}
 
 	@GetMapping("/greeting")
 	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
